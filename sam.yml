@@ -4,6 +4,13 @@ Transform: AWS::Serverless-2016-10-31
 
 Description: AWS Lex Lambdas
 
+Parameters:
+
+  Stage:
+    Type: String
+    Description: The release stage for the functions
+    Default: Development
+
 Resources:
 
   Bot:
@@ -62,7 +69,7 @@ Outputs:
       Fn::GetAtt: [Bot, Arn]
     Export:
       Name:
-        Fn::Sub: "LexBotResource"
+        Fn::Sub: "${Stage}LexBotResource"
 
   Intent:
     Description: ARN Value for Lex Intent Lambda Cloudformation Resource
@@ -70,7 +77,7 @@ Outputs:
       Fn::GetAtt: [Intent, Arn]
     Export:
       Name:
-        Fn::Sub: "LexIntentResource"
+        Fn::Sub: "${Stage}LexIntentResource"
 
   Slot:
     Description: ARN Value for Lex Slot Lambda Cloudformation Resource
@@ -78,4 +85,4 @@ Outputs:
       Fn::GetAtt: [Slot, Arn]
     Export:
       Name:
-        Fn::Sub: "LexSlotResource"
+        Fn::Sub: "${Stage}LexSlotResource"
