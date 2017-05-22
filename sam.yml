@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Transform: AWS::Serverless-2016-10-31
+
+Description: AWS Lex Lambdas
+
+Resources:
+
+  Bot:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.Bot
+      Runtime: nodejs6.10
+      CodeUri: ./out
+      Timeout: 10
+      Policies:
+        - Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - lex:*
+              Resource:
+                - "*"
+
+  Intent:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.Intent
+      Runtime: nodejs6.10
+      CodeUri: ./out
+      Timeout: 10
+      Policies:
+        - Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - lex:*
+              Resource:
+                - "*"
+
+  Slot:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.Slot
+      Runtime: nodejs6.10
+      CodeUri: ./out
+      Timeout: 10
+      Policies:
+        - Version: 2012-10-17
+          Statement:
+            - Effect: Allow
+              Action:
+                - lex:*
+              Resource:
+                - "*"
+
+Outputs:
+
+  Bot:
+    Description: ARN Value for Lex Bot Lambda Cloudformation Resource
+    Value:
+      Fn::GetAtt: [Bot, Arn]
+    Export:
+      Name:
+        Fn::Sub: "LexBotResource"
+
+  Intent:
+    Description: ARN Value for Lex Intent Lambda Cloudformation Resource
+    Value:
+      Fn::GetAtt: [Intent, Arn]
+    Export:
+      Name:
+        Fn::Sub: "LexIntentResource"
+
+  Slot:
+    Description: ARN Value for Lex Slot Lambda Cloudformation Resource
+    Value:
+      Fn::GetAtt: [Slot, Arn]
+    Export:
+      Name:
+        Fn::Sub: "LexSlotResource"

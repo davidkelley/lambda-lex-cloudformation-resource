@@ -1,0 +1,19 @@
+FROM node:6.6
+
+ARG ver
+
+ENV PATH=/node_modules/.bin:$PATH NODE_PATH=$NODE_PATH:/node_modules SERVERLESS_VERSION=$ver
+
+RUN apt-get update \
+    && apt-get -y install python python-dev python-pip \
+    && pip install awscli
+
+WORKDIR /
+
+ADD package.json /package.json
+
+RUN npm install
+
+ADD . /service
+
+WORKDIR /service
