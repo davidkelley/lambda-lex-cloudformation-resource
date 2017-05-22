@@ -4,21 +4,33 @@ The Lambda functions contained within this repository facilitate the setup and c
 
 #### Bot
 
-_Todo: Description_
+Creates an Amazon Lex conversational bot or replaces an existing bot.
+
+See: [here](/functions/bot/schema.js) for expected payloads.
 
 See: [API Documentation](http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBot)
 
 #### Intent
 
-_Todo: Description_
+Creates an intent or replaces an existing intent.
+
+To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an `OrderPizza` intent.
+
+See: [here](/functions/intent/schema.js) for expected payloads.
 
 See: [API Documentation](http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntent)
 
 #### Slot
 
-_Todo: Description_
+Creates a custom slot type or replaces an existing custom slot type.
 
-  See: [API Documentation](http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotType)
+To create a custom slot type, specify a name for the slot type and a set of enumeration values, which are the values that a slot of this type can assume.
+
+If you specify the name of an existing slot type, the fields in the request replace the existing values in the $LATEST version of the slot type. Amazon Lex removes the fields that you don't provide in the request. If you don't specify required fields, Amazon Lex throws an exception.
+
+See: [here](/functions/slot/schema.js) for expected payloads.
+
+See: [API Documentation](http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotType)
 
 ## Contributing
 
