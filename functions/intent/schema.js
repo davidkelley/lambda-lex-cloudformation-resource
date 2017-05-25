@@ -59,7 +59,7 @@ export const Schema = Joi.object({
       uri: Joi.string().required(),
     }),
   }),
-  parentIntentSignature: Joi.string().required(),
+  parentIntentSignature: Joi.string(),
   rejectionStatement: Joi.object().keys({
     messages: Joi.array().items(
       Joi.object().keys({

@@ -54,7 +54,7 @@ describe('λ.bot', () => {
       intentName: faker.random.uuid(),
       intentVersion: faker.random.uuid(),
     }],
-    processBehavior: faker.random.arrayElement(['SAVE', 'BUILD']),
+    processBehavior: faker.random.arrayElement(['Save', 'Build']),
     voiceId: faker.random.uuid(),
   };
 
@@ -121,71 +121,6 @@ describe('λ.bot', () => {
     });
   });
 
-  describe('#update', () => {
-    const requestType = "Update";
-
-    const physicalResourceId = faker.random.uuid();
-
-    const updateRequest = (properties) => {
-      return {
-        StackId: stackId,
-        ResponseURL: responseURL,
-        ResourceProperties: properties,
-        RequestType: requestType,
-        ResourceType: resourceType,
-        RequestId: requestId,
-        PhysicalResourceId: physicalResourceId,
-        LogicalResourceId: logicalResourceId
-      }
-    };
-
-    const mockLex = jest.fn().mockImplementation((params, cb) => {
-      cb(null, params);
-    });
-
-    describe('when the request is valid', () => {
-      beforeAll(() => {
-        AWS.mock('LexModelBuildingService', 'deleteBot', mockLex);
-      });
-
-      beforeAll(() => {
-        AWS.mock('LexModelBuildingService', 'putBot', mockLex);
-      });
-
-      it('succesfully updates a lex bot', async () => {
-        const payload = updateRequest(resourceProperties);
-        const response = await wrapped.run(payload);
-        expect(response.Status).toEqual("SUCCESS");
-        expect(response.PhysicalResourceId).not.toBeNull();
-      });
-
-      it('calls deleteBot and putBot', async () => {
-        const payload = updateRequest(resourceProperties);
-        await wrapped.run(payload);
-        expect(mockLex).toHaveBeenCalled();
-      });
-
-      afterAll(() => {
-        AWS.mock('LexModelBuildingService', 'putBot');
-      });
-    });
-
-    describe('when the request is invalid', () => {
-      Object.keys(invalidProperties).forEach((key) => {
-        describe(`when ${key} is invalid`, () => {
-          it('fails to update a Cognito Identity Pool', async () => {
-            let properties = Object.assign({}, resourceProperties);
-            properties[key] = invalidProperties[key];
-            const payload = updateRequest(properties);
-            const response = await wrapped.run(payload);
-            expect(response.Status).toEqual("FAILED");
-            expect(response.Reason).toMatch(new RegExp(`ValidationError.+${key}`, 'i'));
-          });
-        });
-      });
-    });
-  });
-
   describe('#delete', () => {
     const requestType = "Delete";
 
@@ -222,7 +157,8 @@ describe('λ.bot', () => {
 
       it('does not call deleteBot', async () => {
         const payload = deleteRequest(resourceProperties);
-        await wrapped.run(payload);
+        const failed = Object.assign(payload, { PhysicalResourceId: 'ERROR' });
+        await wrapped.run(failed);
         expect(mockLex).not.toHaveBeenCalled();
       });
 
