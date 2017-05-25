@@ -1,8 +1,8 @@
 import Joi from 'joi';
 
-const generate = () => {
-  return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 9);
-};
+const generate = () => Math.random().toString(36)
+  .replace(/[^a-z]+/g, '')
+  .substr(0, 9);
 
 export const Schema = Joi.object({
   name: Joi.string().default(generate, 'default id'),
