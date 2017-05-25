@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import shortid from 'short-id';
 
-const generate = () => 'lex_' + shortid.generate();
+const generate = () => `lex_${shortid.generate()}`;
 
 export const Schema = Joi.object({
   childDirected: Joi.boolean().truthy('true').falsy('false')
