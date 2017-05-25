@@ -1,11 +1,13 @@
 import Joi from 'joi';
 import shortid from 'short-id';
 
+const generate = () => 'lex_' + shortid.generate();
+
 export const Schema = Joi.object({
   childDirected: Joi.boolean().truthy('true').falsy('false')
     .required(),
   locale: Joi.string().default('en-US').regex(/^[a-z]{2}-[A-Z]{2}$/, 'locale only'),
-  name: Joi.string().default(shortid.generate, 'default id'),
+  name: Joi.string().default(generate, 'default id'),
   abortStatement: Joi.object().keys({
     messages: Joi.array().items(
       Joi.object().keys({
