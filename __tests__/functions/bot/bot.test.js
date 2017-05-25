@@ -55,7 +55,7 @@ describe('λ.bot', () => {
       intentVersion: faker.random.uuid(),
     }],
     processBehavior: faker.random.arrayElement(['Save', 'Build']),
-    voiceId: faker.random.uuid(),
+    voiceId: 'Naja',
   };
 
   const invalidProperties = {
