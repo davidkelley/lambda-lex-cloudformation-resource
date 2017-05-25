@@ -1,7 +1,8 @@
 import Joi from 'joi';
-import shortid from 'short-id';
 
-const generate = () => `lex_${shortid.generate()}`;
+const generate = () => {
+  return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 9);
+};
 
 export const Schema = Joi.object().keys({
   name: Joi.string().default(generate, 'default id'),
