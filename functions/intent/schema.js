@@ -79,7 +79,7 @@ export const Schema = Joi.object({
       responseCard: Joi.string(),
       sampleUtterances: Joi.array().items(Joi.string()),
       slotType: Joi.string(),
-      slotTypeVersion: Joi.string(),
+      slotTypeVersion: Joi.string().default('$LATEST'),
       valueElicitationPrompt: Joi.object().keys({
         maxAttempts: Joi.number().min(0).required(),
         messages: Joi.array().items(
