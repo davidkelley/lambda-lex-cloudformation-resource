@@ -29,6 +29,10 @@ describe('λ.slot', () => {
   const resourceProperties = {
     checksum: faker.random.uuid(),
     description: faker.random.words(),
+    enumerationValues: [
+      { value: 'father' },
+      { value: 'mother' }
+    ]
   };
 
   const invalidProperties = {

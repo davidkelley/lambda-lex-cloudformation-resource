@@ -9,8 +9,8 @@
   "dependencies": {
     "aws-sdk": "^2.54.0",
     "babel-runtime": "6.11.6",
-    "joi": "10.2.1",
-    "node-lambda-events": "^0.0.10",
+    "joi": "10.5.0",
+    "node-lambda-events": "^0.1.6",
     "shortid": "^2.2.8"
   },
   "devDependencies": {
