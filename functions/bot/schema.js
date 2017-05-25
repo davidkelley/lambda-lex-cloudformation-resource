@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import shortid from 'shortid';
+import shortid from 'short-id';
 
 export const Schema = Joi.object({
   childDirected: Joi.boolean().truthy('true').falsy('false')
