@@ -21,13 +21,8 @@ export default Cloudformation.wrap(class extends Cloudformation {
     }
   }
 
-  async update() {
-    try {
-      await this.lex(DELETE_SLOT_TYPE, { name: this.id });
-      await this.create();
-    } catch (err) {
-      this.response.respond(ERROR, { id: ERROR, reason: err.toString() });
-    }
+  update() {
+    return this.create();
   }
 
   async delete() {

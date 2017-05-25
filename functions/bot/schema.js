@@ -37,6 +37,6 @@ export const Schema = Joi.object({
       intentVersion: Joi.string().required(),
     }),
   ),
-  processBehavior: Joi.string().valid('SAVE', 'BUILD'),
+  processBehavior: Joi.string().valid('Save', 'Build'),
   voiceId: Joi.string(),
 });
